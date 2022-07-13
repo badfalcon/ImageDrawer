@@ -1,26 +1,20 @@
 a = "ImageDrawer\n\nmade by \nbadfalcon\nbadfalcon610@gmail.com"
 console.log(a);
 
-var toolIndex;
-var colorIndex;
-var lineIndex;
+let toolIndex;
+let colorIndex;
+let lineIndex;
 
-$(window).on('load', function () {
-    chrome.runtime.onInstalled.addListener(function () {
-        setDefault();
-    });
-
-    chrome.runtime.onStartup.addListener(function () {
-        setDefault();
-    });
+chrome.runtime.onInstalled.addListener(function () {
+    setDefault();
 });
 
-function getToolSetting() {
-    return [toolIndex, lineIndex, colorIndex];
-}
+chrome.runtime.onStartup.addListener(function () {
+    setDefault();
+});
 
 function setToolSetting(ti, li, ci) {
-    var args = {};
+    let args = {};
     if (ti != null) {
         args["toolIndex"] = ti;
     }
@@ -60,9 +54,8 @@ function setDefault() {
     });
 }
 
-var ContextMenus = new function () {
-    var items = {};
-    var callbacks = {};
+let ContextMenus = new function () {
+    let items = {};
 
     this.setItems = function (aItems) {
         aItems.forEach(function (item) {
@@ -104,25 +97,24 @@ var ContextMenus = new function () {
                     setLine(lineIds.indexOf(info.menuItemId));
                     break;
             }
-//            chrome.contextMenus.update(info.menuItemId, {checked: true});
         }
     });
 };
-var mainTitles = ["convert image drawable", "change tool", "change color", "change line width", "reset image", "flip image horizontal", "flip image vertical"];
-var mainIds = ["toCanvas", "changeTool", "changeColor", "changeLine", "resetCanvas", "flipHorizontal", "flipVertical"];
-var mainContexts = ["image", "all", "all", "all", "all", "all", "all"];
+let mainTitles = ["convert image drawable", "change tool", "change color", "change line width", "reset image", "flip image horizontal", "flip image vertical"];
+let mainIds = ["toCanvas", "changeTool", "changeColor", "changeLine", "resetCanvas", "flipHorizontal", "flipVertical"];
+let mainContexts = ["image", "all", "all", "all", "all", "all", "all"];
 
-var toolTitles = ["pen", "line"];
-var toolIds = ["toPen", "toLine"];
+let toolTitles = ["pen", "line"];
+let toolIds = ["toPen", "toLine"];
 
-var colorTitles = ["black", "white", "Red", "Green", "Blue"];
-var colorIds = ["toBlack", "toWhite", "toRed", "toGreen", "toBlue"];
+let colorTitles = ["black", "white", "Red", "Green", "Blue"];
+let colorIds = ["toBlack", "toWhite", "toRed", "toGreen", "toBlue"];
 
-var lineTitles = ["1", "3", "5"];
-var lineIds = ["toThinLine", "toNormalLine", "toThickLine"];
+let lineTitles = ["1", "3", "5"];
+let lineIds = ["toThinLine", "toNormalLine", "toThickLine"];
 
 function ContextItems() {
-    var items = [];
+    let items = [];
 
     items.push({
         title: "Image Drawer options",
@@ -131,7 +123,7 @@ function ContextItems() {
     });
 
 
-    for (var i = 0; i < mainTitles.length; i++) {
+    for (let i = 0; i < mainTitles.length; i++) {
         items.push({
             title: mainTitles[i],
             parentId: 'main',
@@ -140,7 +132,7 @@ function ContextItems() {
         });
     }
 
-    for (var i = 0; i < toolTitles.length; i++) {
+    for (let i = 0; i < toolTitles.length; i++) {
         items.push({
             //        type: "radio",
             title: toolTitles[i],
@@ -150,7 +142,7 @@ function ContextItems() {
         });
     }
 
-    for (var i = 0; i < colorTitles.length; i++) {
+    for (let i = 0; i < colorTitles.length; i++) {
         items.push({
 //            type: "radio",
             title: colorTitles[i],
@@ -160,7 +152,7 @@ function ContextItems() {
         });
     }
 
-    for (var i = 0; i < lineTitles.length; i++) {
+    for (let i = 0; i < lineTitles.length; i++) {
         items.push({
             //      type: "radio",
             title: lineTitles[i],
