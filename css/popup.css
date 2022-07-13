@@ -1,0 +1,8 @@
+th,td{
+  text-align: left;
+  white-space: nowrap;
+}
+
+span#result {
+    display: none;
+}
